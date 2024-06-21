@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
-const withAuth = require('../utils/auth');
 
+// Route to get the homepage
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -15,42 +15,34 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('homepage', { 
-      posts, 
-      logged_in: req.session.logged_in 
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/dashboard', withAuth, async (req, res) => {
-  try {
-    const postData = await Post.findAll({
-      where: {
-        user_id: req.session.user_id,
-      },
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
-    });
-
-    const posts = postData.map((post) => post.get({ plain: true }));
-
-    console.log("Rendering dashboard view with posts:", posts);
-
-    res.render('dashboard', {
+    res.render('homepage', {
       posts,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+// Route to get the login page
+router.get('/login', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+  res.render('login');
+});
+
+// Route to get the signup page
+router.get('/signup', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+  res.render('signup');
+});
+
+// Route to get a single post by ID
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -69,39 +61,11 @@ router.get('/post/:id', async (req, res) => {
     const post = postData.get({ plain: true });
 
     res.render('single-post', {
-      ...post,
-      logged_in: req.session.logged_in
+      post,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
-  }
-});
-
-router.get('/login', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/');
-    return;
-  }
-
-  res.render('login');
-});
-
-router.get('/signup', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/');
-    return;
-  }
-
-  res.render('signup');
-});
-
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
   }
 });
 

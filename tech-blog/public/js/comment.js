@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const User = require('./Users'); // Ensure correct path and file name
+const Post = require('./Post'); // Ensure correct path and file name
 
 class Comment extends Model {}
 
@@ -38,5 +40,13 @@ Comment.init(
     modelName: 'comment',
   }
 );
+
+Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id',
+});
 
 module.exports = Comment;

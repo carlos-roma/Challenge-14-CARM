@@ -1,4 +1,5 @@
 <h2>Dashboard</h2>
+<a href="/">Home</a> <!-- Added link to navigate to home -->
 <button id="new-post">New Post</button>
 <form id="post-form" class="new-post-form" style="display: none;">
   <div>
@@ -21,4 +22,16 @@
   </div>
   {{/each}}
 </div>
-<script src="../public/js/dashboard.js"></script>
+<form id="edit-form" style="display: none;">
+  <input type="hidden" id="edit-id" name="edit-id">
+  <div>
+    <label for="edit-title">Title</label>
+    <input type="text" id="edit-title" name="edit-title" required>
+  </div>
+  <div>
+    <label for="edit-content">Content</label>
+    <textarea id="edit-content" name="edit-content" required></textarea>
+  </div>
+  <button type="submit">Update Post</button>
+</form>
+<script src="/js/dashboard.js"></script>

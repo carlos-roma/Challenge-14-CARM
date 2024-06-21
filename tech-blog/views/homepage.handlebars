@@ -1,7 +1,9 @@
 <h1>Homepage</h1>
+
 {{#each posts}}
   <div class="post">
-    <h2><a href="/post/{{id}}">{{title}}</a></h2>
-    <p>By {{user.username}} on {{format_date createdAt}}</p>
+    <h2><a href="/post/{{this.id}}">{{this.title}}</a></h2>
+    <p>{{this.content}}</p>
+    <p>Posted by {{this.user.username}} on {{this.created_at}}</p>
   </div>
 {{/each}}

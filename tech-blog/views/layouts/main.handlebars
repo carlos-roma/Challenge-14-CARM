@@ -9,24 +9,24 @@
 <body>
   <header>
     <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        {{#if logged_in}}
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li>
-          <form id="logout-form" action="/logout" method="POST">
-            <button type="submit">Logout</button>
-          </form>
-        </li>
-        {{else}}
-        <li><a href="/login">Login</a></li>
-        <li><a href="/signup">Sign Up</a></li>
-        {{/if}}
-      </ul>
+      <a href="/">Home</a>
+      {{#if logged_in}}
+        <a href="/dashboard">Dashboard</a>
+        <form action="/logout" method="POST" style="display:inline;">
+          <button type="submit">Logout</button>
+        </form>
+      {{else}}
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+      {{/if}}
     </nav>
   </header>
   <div class="container">
     {{{body}}}
   </div>
+  <footer>
+    <p>&copy; 2024 Your Blog</p>
+  </footer>
+  <script src="/js/idleTimer.js"></script>
 </body>
 </html>
