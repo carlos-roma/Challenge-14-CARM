@@ -1,21 +1,24 @@
-<h1>Dashboard</h1>
+<h2>Dashboard</h2>
 <button id="new-post">New Post</button>
-<div id="post-form" style="display:none; margin-top: 20px;">
-  <form id="new-post-form">
-    <label for="title">Title:</label>
+<form id="post-form" class="new-post-form" style="display: none;">
+  <div>
+    <label for="title">Title</label>
     <input type="text" id="title" name="title" required>
-    <label for="content">Content:</label>
-    <textarea id="content" name="content" required></textarea>
-    <button type="submit">Create Post</button>
-  </form>
-</div>
-{{#each posts}}
-  <div class="post">
-    <h2><a href="/post/{{id}}">{{title}}</a></h2>
-    <p>By {{user.username}} on {{format_date createdAt}}</p>
-    <button data-id="{{id}}" class="edit-post">Edit</button>
-    <button data-id="{{id}}" class="delete-post">Delete</button>
   </div>
-{{/each}}
-
+  <div>
+    <label for="content">Content</label>
+    <textarea id="content" name="content" required></textarea>
+  </div>
+  <button type="submit">Create Post</button>
+</form>
+<div id="post-list">
+  {{#each posts}}
+  <div class="post">
+    <h3>{{this.title}}</h3>
+    <p>{{this.content}}</p>
+    <button class="delete-post" data-id="{{this.id}}">Delete</button>
+    <button class="edit-post" data-id="{{this.id}}">Edit</button>
+  </div>
+  {{/each}}
+</div>
 <script src="../public/js/dashboard.js"></script>

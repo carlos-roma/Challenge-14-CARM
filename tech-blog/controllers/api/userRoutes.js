@@ -4,10 +4,10 @@ const { User } = require('../../models');
 // Sign up route
 router.post('/', async (req, res) => {
   try {
-    console.log('Received user data:', req.body);  // Log the received data
+    console.log('Received user data:', req.body);
 
     const userData = await User.create(req.body);
-    console.log('User created:', userData);  // Log the created user data
+    console.log('User created:', userData);
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
       res.status(200).json(userData);
     });
   } catch (err) {
-    console.error('Error creating user:', err);  // Log any errors
+    console.error('Error creating user:', err);
     res.status(400).json(err);
   }
 });
@@ -46,6 +46,7 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
+    console.error('Error logging in:', err);
     res.status(400).json(err);
   }
 });
