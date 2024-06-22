@@ -1,32 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}}</title>
-  <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="/">Home</a>
-      {{#if logged_in}}
-        <a href="/dashboard">Dashboard</a>
-        <form action="/logout" method="POST" style="display:inline;">
-          <button type="submit">Logout</button>
-        </form>
-      {{else}}
-        <a href="/login">Login</a>
-        <a href="/signup">Sign Up</a>
-      {{/if}}
-    </nav>
-  </header>
-  <div class="container">
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            {{#if logged_in}}
+            <a href="/dashboard">Dashboard</a>
+            <button id="logout">Logout</button>
+            {{else}}
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
+            {{/if}}
+        </nav>
+    </header>
     {{{body}}}
-  </div>
-  <footer>
-    <p>&copy; 2024 Your Blog</p>
-  </footer>
-  <script src="/js/idleTimer.js"></script>
+    <script src="/js/logout.js"></script>
 </body>
 </html>

@@ -1,20 +1,29 @@
-<h2>{{post.title}}</h2>
-<p>{{post.content}}</p>
-<p>Posted by {{post.user.username}} on {{post.created_at}}</p>
-
-{{#if logged_in}}
-  <form id="comment-form">
-    <textarea id="comment-content" name="comment-content" required></textarea>
-    <button type="submit">Add Comment</button>
-  </form>
-{{/if}}
-
-<h3>Comments</h3>
-{{#each post.comments}}
-  <div class="comment">
-    <p>{{this.content}}</p>
-    <p>Commented by {{this.user.username}} on {{this.created_at}}</p>
-  </div>
-{{/each}}
-
-<script src="/js/comment.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.title}}</title>
+</head>
+<body>
+    <h1>{{post.title}}</h1>
+    <p>{{post.created_at}}</p>
+    <p>By {{post.user.username}}</p>
+    <p>{{post.content}}</p>
+    {{#if logged_in}}
+    <form id="comment-form">
+        <textarea id="comment" name="comment" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    {{/if}}
+    <div id="comments">
+        {{#each post.comments}}
+        <div class="comment">
+            <p>{{this.content}}</p>
+            <p>By {{this.user.username}} on {{this.created_at}}</p>
+        </div>
+        {{/each}}
+    </div>
+    <script src="/js/comment.js"></script>
+</body>
+</html>

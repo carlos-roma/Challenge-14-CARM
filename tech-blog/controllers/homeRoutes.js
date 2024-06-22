@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 
-// Route to get the homepage
+// Route to get all posts for the homepage
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route to get the login page
+// Route to render login page
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
@@ -33,7 +33,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-// Route to get the signup page
+// Route to render signup page
 router.get('/signup', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
@@ -53,10 +53,18 @@ router.get('/post/:id', async (req, res) => {
         },
         {
           model: Comment,
-          include: [User],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
         },
       ],
     });
+
+    if (!postData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
 
     const post = postData.get({ plain: true });
 
