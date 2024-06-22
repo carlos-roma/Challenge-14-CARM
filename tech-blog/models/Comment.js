@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const User = require('./Users');
+const Post = require('./Post');
 
 class Comment extends Model {}
 
@@ -29,16 +31,6 @@ Comment.init(
         key: 'id',
       },
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: DataTypes.NOW,
-    },
   },
   {
     sequelize,
@@ -48,5 +40,13 @@ Comment.init(
     modelName: 'comment',
   }
 );
+
+Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id',
+});
 
 module.exports = Comment;
