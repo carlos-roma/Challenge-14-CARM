@@ -1,0 +1,13 @@
+<h2>Your Dashboard</h2>
+<a href="/dashboard/new">Create a New Post</a>
+
+<div class="post-list">
+  {{#each posts}}
+    <div class="post-item">
+      <h3>{{this.title}}</h3>
+      <p>{{this.content}}</p>
+      <a href="/dashboard/edit/{{this.id}}" class="btn btn-primary">Edit</a>
+      <button class="btn btn-danger delete-post" data-id="{{this.id}}">Delete</button>
+    </div>
+  {{/each}}
+</div>

@@ -1,0 +1,30 @@
+{
+    "name": "mvc-blog",
+    "version": "1.0.0",
+    "description": "A blog site",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "jest"
+    },
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "connect-session-sequelize": "^7.0.4",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "express-handlebars": "^5.3.2",
+        "express-session": "^1.17.1",
+        "mysql2": "^2.3.2",
+        "sequelize": "^6.6.5",
+        "util": "^0.12.5"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "jsdom": "^24.1.0",
+        "supertest": "^7.0.0"
+    },
+    "jest": {
+        "testEnvironment": "jest-environment-jsdom"
+    }
+}

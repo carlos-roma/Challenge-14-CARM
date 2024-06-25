@@ -1,0 +1,24 @@
+<h2>{{post.title}}</h2>
+<p>{{post.content}}</p>
+
+<h3>Comments</h3>
+<div id="comment-section">
+{{#each post.comments}}
+  <div>
+    <p>{{this.commentText}}</p>
+    <p>Posted by {{this.username}} on {{this.createdAt}}</p>
+    {{#if ../logged_in}}
+      <button class="delete-comment" data-id="{{this.id}}">Delete</button>
+    {{/if}}
+  </div>
+{{/each}}
+</div>
+
+{{#if logged_in}}
+  <form id="comment-form">
+    <textarea name="comment" placeholder="Add a comment" required></textarea>
+    <button type="submit">Add Comment</button>
+  </form>
+{{/if}}
+
+<script src="/js/comment.js"></script> <!-- Ensure the script is included -->
